@@ -25,10 +25,8 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include <sys/types.h>
 #include <time.h>
-#ifdef __APPLE__
-    #include <sys/types.h>
-#endif
 
 #include <libyang/libyang.h>
 
@@ -458,12 +456,10 @@ const char *sr_get_repo_path(void);
  * @param[in] conn Connection to use.
  * @param[in] schema_path Path to the new schema. Can have either YANG or YIN extension/format.
  * @param[in] search_dirs Optional search directories for import schemas, supports the format `<dir>[:<dir>]*`.
- * @param[in] features Array of enabled features.
- * @param[in] feat_count Number of enabled features.
+ * @param[in] features Array of enabled features ended with NULL.
  * @return Error code (::SR_ERR_OK on success).
  */
-int sr_install_module(sr_conn_ctx_t *conn, const char *schema_path, const char *search_dirs, const char **features,
-        int feat_count);
+int sr_install_module(sr_conn_ctx_t *conn, const char *schema_path, const char *search_dirs, const char **features);
 
 /**
  * @brief Set newly installed module startup and running data. It is necessary in case empty data are not valid
